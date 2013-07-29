@@ -8,9 +8,17 @@
         {"name": "Vitalii Nagara", "email": "duke@ejoom.com", "homepage": "http://www.maxmind.com/"}
     ],
 
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.zendframework.com/"
+        }
+    ],
+
     "require": {
         "php":                              ">=5.3.3",
-        "geoip/geoip":                      "~1.13"
+        "geoip/geoip":                      "~1.13",
+        "zendframework/zend-stdlib":        "~2.4"
     },
 
     "autoload": {

@@ -36,7 +36,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                 'geoip' => function ($serviceManager) {
                     $config = $serviceManager->get('config');
                     $options = $config['geoip_module'];
-                    $geoip = new GeoipModule\Service\Geoip($options['filename'], $options['flag']);
+                    $geoip = new \GeoipModule\Service\Geoip($options['filename'], $options['flag']);
                     return $geoip;
                 }
             ),

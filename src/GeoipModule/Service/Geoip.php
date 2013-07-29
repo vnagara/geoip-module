@@ -47,9 +47,14 @@ class Geoip
         if (null === $ipAddress) $ipAddress = $_SERVER['REMOTE_ADDR'];
 
         $record = GeoIP_record_by_addr($this->geoip, $ipAddress);
+        if ($record === null) {
+            return null;
+        }
+
         $recordObject = new Record;
         $hydrator = new ClassMethods();
-        $hydrator->hydrate($record, $recordObject);
+        $hydrator->hydrate(get_object_vars($record), $recordObject);
+
         return $recordObject;
     }
 
