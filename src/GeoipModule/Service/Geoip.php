@@ -24,6 +24,11 @@ class Geoip
      */
     protected $geoip;
 
+    /**
+     * @var \GeoipModule\Object\Record
+     */
+    protected $recordInstance;
+
     public function __construct($filename, $flag = GEOIP_STANDARD)
     {
         $this->filename = $filename;
@@ -38,6 +43,24 @@ class Geoip
     }
 
     /**
+     * @return GeoipModule\Object\RecordInterface
+     */
+    public function getRecordInstance()
+    {
+        if ($this->recordInstance === null) {
+            $this->recordInstance = new Record();
+        }
+
+        return $this->recordInstance;
+    }
+
+    public function setRecordInstance($instance)
+    {
+        $this->recordInstance = $instance;
+        return $this;
+    }
+
+    /**
      *
      * @param string $ipAddress
      * @return \GeoipModule\Object\Record
@@ -47,7 +70,7 @@ class Geoip
         if (null === $ipAddress) $ipAddress = $_SERVER['REMOTE_ADDR'];
 
         $record = GeoIP_record_by_addr($this->geoip, $ipAddress);
-        $recordObject = new Record;
+        $recordObject = clone $this->getRecordInstance();
 
         if ($record !== null) {
             $hydrator = new ClassMethods();

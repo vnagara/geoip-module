@@ -8,7 +8,7 @@ namespace GeoipModule\Object;
  * @see \geoiprecord
  * @author duke
  */
-class Record
+class Record implements RecordInterface
 {
     protected $countryCode;
     protected $countryCode3;

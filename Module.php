@@ -5,13 +5,18 @@ namespace GeoipModule;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 
 /**
  * Example of Module
  *
  * @author duke
  */
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface
+class Module implements 
+    AutoloaderProviderInterface,
+    ConfigProviderInterface,
+    ServiceProviderInterface,
+    ViewHelperProviderInterface
 {
     public function getConfig()
     {
@@ -43,4 +48,17 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
         );
     }
 
+    public function getViewHelperConfig()
+    {
+        return array(
+            'factories' => array(
+                'geoipRecord' => function ($serviceManager) {
+                    $geoipService = $serviceManager->get('geoip');
+                    $helper = new View\Helper\GeoipRecord();
+                    $helper->setGeoip($geoipService);
+                    return $helper;
+                }
+            ),
+        );
+    }
 }
