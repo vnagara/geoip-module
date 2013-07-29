@@ -1,0 +1,7 @@
+<?php
+return array(
+    'geoip_module' => array(
+        'filename' => 'data/GeoLiteCity.dat',
+        'flag'     => 'GEOIP_STANDARD',  //can be GEOIP_MEMORY_CACHE or GEOIP_SHARED_MEMORY
+    ),
+);
