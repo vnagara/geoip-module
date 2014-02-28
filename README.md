@@ -26,6 +26,29 @@ Install it by composer.
     }
 }
 ~~~
+Download geoip sql DB to _data/GeoLiteCity.dat_ or set another path in configuration file.  
+On linux with wget you can use this command (inside project root):
+~~~
+    wget -O - http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz | gzip -dc > data/GeoLiteCity.dat
+~~~
+
+In _application.config.php_ enable __GeoipModule__ module.
+
 
 ##New methods:
-In view helpers: __geoipRecord($ipAddress)__ will return GeoipRecord.
+  1. In view helpers: __geoipRecord($ipAddress)__ will return GeoipRecord.
+  2. There is new service __geoip__. So in controller it is accessible by:
+~~~
+    /** @var \GeoipModule\Service\Geoip */
+    $geoip = $this->getServiceLocator()->get('geoip');
+
+    /** @var \GeoipModule\Object\Record */
+    $recordOfSomeIpAddress = $geoip->find('184.154.227.14');
+    $city = $recordOfSomeIpAddress->getCity();  // Chicago
+
+    // The same:
+    $recordOfSomeIpAddress = $geoip->lookup('184.154.227.14');
+
+    // To use ip from $_SERVER['REMOTE_ADDR']
+    $record = $geoip->find();
+~~~

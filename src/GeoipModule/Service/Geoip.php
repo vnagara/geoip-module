@@ -62,7 +62,7 @@ class Geoip
 
     /**
      *
-     * @param string $ipAddress
+     * @param null|string $ipAddress
      * @return \GeoipModule\Object\Record
      */
     public function find($ipAddress = null)
@@ -82,7 +82,7 @@ class Geoip
 
     /**
      * Proxy to find()
-     * @param string $ipAddress
+     * @param null|string $ipAddress
      * @return \GeoipModule\Object\Record
      */
     public function lookup($ipAddress = null)
