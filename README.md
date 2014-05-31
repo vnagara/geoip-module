@@ -52,3 +52,7 @@ In _application.config.php_ enable __GeoipModule__ module.
     // To use ip from $_SERVER['REMOTE_ADDR']
     $record = $geoip->find();
 ~~~
+
+
+##Doctrine ORM
+Template of Entity with annotation lays by path: __src/GeoipModule/Entity/Record.php__
